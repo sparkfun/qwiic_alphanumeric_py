@@ -41,7 +41,7 @@
 # SOFTWARE.
 #==================================================================================
 
-"""
+"""!
 qwiic_alphanumeric
 ==================
 Python module for the SparkFun Qwiic Alphanumeric displays.
@@ -63,15 +63,15 @@ _QWIIC_ALPHANUMERIC_DEFAULT_ADDRESS = 0x70
 _AVAILABLE_I2C_ADDRESS = [_QWIIC_ALPHANUMERIC_DEFAULT_ADDRESS, 0x71, 0x72, 0x73]
 
 class QwiicAlphanumeric(object):
-    """
+    """!
     QwiicAlphanumeric
 
-        :param address: The I2C address to use for the device.
-                        If not provided, the default address is used.
-        :param i2c_driver: An existing i2c driver object. If not provided a
-                        a driver is created.
-        :return: The QwiicAlphanumeric device object.
-        :rtype: Object
+    @param address: The I2C address to use for the device.
+                    If not provided, the default address is used.
+    @param i2c_driver: An existing i2c driver object. If not provided a
+                    a driver is created.
+
+    @return  The 
     """
     # Constructor
     device_name = _DEFAULT_NAME
@@ -257,19 +257,19 @@ class QwiicAlphanumeric(object):
     #
     # Initialize the system and validate the baord.
     def begin(self, address_display_one = _QWIIC_ALPHANUMERIC_DEFAULT_ADDRESS, address_display_two = DEFAULT_NOTHING_ATTACHED, address_display_three = DEFAULT_NOTHING_ATTACHED, address_display_four = DEFAULT_NOTHING_ATTACHED):
-        """
-            Initialize the operation of the Qwiic Alphanumeric.
-            Assign addresses to displays and determine the number of displays connected to the bus.
-            Run is_connected().
-            Initialize and clear displays.
-            
-            :param address_display_one: I2C address of first display
-            :param address_display_two: I2C address of the second display
-            :param address_dispplay_three: I2C address of the third display
-            :param address_display_four: I2C address of the fourth display
-            :return: Returns true if a Qwiic Alphanumeric is connected to the system.
-                    False otherwise.
-            :rtype: bool
+        """!
+        Initialize the operation of the Qwiic Alphanumeric.
+        Assign addresses to displays and determine the number of displays connected to the bus.
+        Run is_connected().
+        Initialize and clear displays.
+
+        @param address_display_one: I2C address of first display
+        @param address_display_two: I2C address of the second display
+        @param address_dispplay_three: I2C address of the third display
+        @param address_display_four: I2C address of the fourth display
+
+        @return **bool** Returns true if a Qwiic Alphanumeric is connected to the system.
+                False otherwise.
         """
         self._device_address_display_one = address_display_one # Grab the address(es) of the alphanumeric(s)
         self._device_address_display_two = address_display_two
@@ -304,12 +304,12 @@ class QwiicAlphanumeric(object):
     #
     # Check if there are acutal boards connected to the system
     def is_connected(self, display_number):
-        """
-            Check that dispplays are responding on the I2C bus.
+        """!
+        Check that dispplays are responding on the I2C bus.
 
-            :param display_number: The number of the display on the bus
-            :return: True if the device is connected, false otherwise.
-            :rtype: bool
+        @param display_number: The number of the display on the bus
+
+        @return **bool** True if the device is connected, false otherwise.
         """
         tries_before_giveup = 5 
         
@@ -325,13 +325,12 @@ class QwiicAlphanumeric(object):
     #
     # Run through initialization sequence for each display connected on the I2C bus
     def initialize(self):
-        """
-            Run through initialization sequence for each display connected on the I2C bus
-            Enable clocks, set brightness default to full brightness, turn off blinking, and
-            turn all displays on
+        """!
+        Run through initialization sequence for each display connected on the I2C bus
+        Enable clocks, set brightness default to full brightness, turn off blinking, and
+        turn all displays on
 
-            :return: True if all function calls passed, False if there's a failure somewhere
-            :rtype: bool
+        @return **bool** True if all function calls passed, False if there's a failure somewhere
         """
         # Turn on system clock of all displays
         if self.enable_system_clock() == False:
@@ -356,11 +355,10 @@ class QwiicAlphanumeric(object):
     #
     # Turn on the system oscillator for all displays on the I2C bus
     def enable_system_clock(self):
-        """
-            Turn on the system oscillator for all displays on the I2C bus
+        """!
+        Turn on the system oscillator for all displays on the I2C bus
 
-            :return: True if all clocks successfully enabled, false otherwise.
-            :rtype: bool
+        @return **bool** True if all clocks successfully enabled, false otherwise.
         """
         status = True
         
@@ -375,11 +373,10 @@ class QwiicAlphanumeric(object):
     #
     # Turn off the system oscillator for all displays on the bus
     def disable_system_clock(self):
-        """
-            Turn off the system oscillator for all displays on the bus
+        """!
+        Turn off the system oscillator for all displays on the bus
 
-            :return: True if all clocks successfully disabled, false otherwise.
-            :rtype: bool
+        @return **bool** True if all clocks successfully disabled, false otherwise.
         """
         status = True
 
@@ -394,13 +391,13 @@ class QwiicAlphanumeric(object):
     #
     # Turn on the system oscillator for normal operation mode
     def enable_system_clock_single(self, display_number):
-        """
-            Turn on the system oscillator for normal operation mode
+        """!
+        Turn on the system oscillator for normal operation mode
 
-            :param display_number: number of display on I2C bus to enable the system clock
-                for.
-            :return: True if setting updated successfully, false otherwise.
-            :rtype: bool
+        @param display_number: number of display on I2C bus to enable the system clock
+            for.
+
+        @return **bool** True if setting updated successfully, false otherwise.
         """
         data_to_write = self.ALPHA_CMD_SYSTEM_SETUP | 1 # Enable system clock  bit
 
@@ -414,13 +411,13 @@ class QwiicAlphanumeric(object):
     #
     # Turn off the system oscillator for standby mode
     def disable_system_clock_single(self, display_number):
-        """
-            Turn off the system oscillator for standby mode
+        """!
+        Turn off the system oscillator for standby mode
 
-            :param display_number: number of display on I2C bus to disable the system
-                clock for.
-            :return: True if setting updated successfully, false otherwise.
-            :rtype: bool
+        @param display_number: number of display on I2C bus to disable the system
+            clock for.
+
+        @return **bool** True if setting updated successfully, false otherwise.
         """
         data_to_write = self.ALPHA_CMD_SYSTEM_SETUP | 0 # Standby mode
 
@@ -431,13 +428,13 @@ class QwiicAlphanumeric(object):
     #
     # This function connects the display number to its coressponding address
     def look_up_display_address(self, display_number):
-        """
-            This function connects the display number to its coressponding address
+        """!
+        This function connects the display number to its coressponding address
 
-            :param display_number: number of display on I2C bus. The left-most display is zero
-                and display number increments by 1 with each additional display on bus.
-            :return: The I2C address of given display. 0 if display_number is not valid
-            :rtype: int
+        @param display_number: number of display on I2C bus. The left-most display is zero
+            and display number increments by 1 with each additional display on bus.
+
+        @return **int** The I2C address of given display. 0 if display_number is not valid
         """
         if display_number == 1:
             return self._device_address_display_one
@@ -455,11 +452,10 @@ class QwiicAlphanumeric(object):
     #
     # Turn off all segments of all displays connected to bus
     def clear(self):
-        """
-            Turn off all segments of all displays connected to bus
+        """!
+        Turn off all segments of all displays connected to bus
 
-            :return: True if display was updated correctly, false otherwise
-            :rtype: bool
+        @return **bool** True if display was updated correctly, false otherwise
         """
         # Clear the display_RAM array
         for i in range(0, 16 * self.number_of_displays):
@@ -475,13 +471,13 @@ class QwiicAlphanumeric(object):
     # 
     # This function sets the brightness of all displays on the bus
     def set_brightness(self, duty):
-        """
-            This function sets the brightness of all displays on the bus.
-            Duty cycle over 16.
+        """!
+        This function sets the brightness of all displays on the bus.
+        Duty cycle over 16.
 
-            :param duty: Valid between 0 (1/16 brightnss) and 15 (full brightness)
-            :return: True if brightness is successfully updated, false otherwise.
-            :rtype: bool
+        @param duty: Valid between 0 (1/16 brightnss) and 15 (full brightness)
+
+        @return **bool** True if brightness is successfully updated, false otherwise.
         """
         status = True
 
@@ -496,13 +492,13 @@ class QwiicAlphanumeric(object):
     #
     # Set the brightness of a single display
     def set_brightness_single(self, display_number, duty):
-        """
-            Set the brightness of a single display
+        """!
+        Set the brightness of a single display
 
-            :param display_number: The number of display on the I2C bus.
-            :param duty: Over 16. Valid between 0 (display off) and 15 (full brightness)
-            :return: True if brightness is successfully updated, false otherwise.
-            :rtype: bool
+        @param display_number: The number of display on the I2C bus.
+        @param duty: Over 16. Valid between 0 (display off) and 15 (full brightness)
+
+        @return **bool** True if brightness is successfully updated, false otherwise.
         """
         # Error check
         if duty > 15:
@@ -518,14 +514,14 @@ class QwiicAlphanumeric(object):
     #
     # Set the blink rate of all displays on the bus
     def set_blink_rate(self, rate):
-        """
-            Set the blink rate of all displays on the bus as defined by the datasheet.
+        """!
+        Set the blink rate of all displays on the bus as defined by the datasheet.
 
-            :param rate: Blink frequency in Hz. Valid options are defined by datasheet:
-                2.0, 1.0, or 0.5 Hz. Any other input to this function will result in steady
-                alphanumeric display (no blink).
-            :return: True if blink setting is successfully updated, false otherwise.
-            :rtype: bool
+        @param rate: Blink frequency in Hz. Valid options are defined by datasheet:
+            2.0, 1.0, or 0.5 Hz. Any other input to this function will result in steady
+            alphanumeric display (no blink).
+
+        @return **bool** True if blink setting is successfully updated, false otherwise.
         """
         status = True
 
@@ -540,15 +536,15 @@ class QwiicAlphanumeric(object):
     #
     # Set the blink rate of a single display on the bus
     def set_blink_rate_single(self, display_number, rate):
-        """
-            Set the blink rate of a single display on the bus
+        """!
+        Set the blink rate of a single display on the bus
 
-            :param display_number: the number of display to be updated
-            :param rate: Blink frequency in Hz. Valid options are defined by datasheet:
-                2.0, 1.0, or 0.5 Hz. Any other input to this function will result in steady
-                alphanumeric display (no blink).
-            :return: True if blink setting is successfully updated, false otherwise.
-            :rtype: bool
+        @param display_number: the number of display to be updated
+        @param rate: Blink frequency in Hz. Valid options are defined by datasheet:
+            2.0, 1.0, or 0.5 Hz. Any other input to this function will result in steady
+            alphanumeric display (no blink).
+
+        @return **bool** True if blink setting is successfully updated, false otherwise.
         """
         if rate == 2.0:
             blink_rate = self.ALPHA_BLINK_RATE_2HZ
@@ -568,12 +564,12 @@ class QwiicAlphanumeric(object):
     #
     # Turn a single alphanumeric display on
     def display_on_single(self, display_number):
-        """
-            Turn a single alphanumeric display on
+        """!
+        Turn a single alphanumeric display on
 
-            :param display_number: the number of display to be updated
-            :return: True if display is successfully turned on, false otherwise
-            :rtype: bool
+        @param display_number: the number of display to be updated
+
+        @return **bool** True if display is successfully turned on, false otherwise
         """
         return self.set_display_on_off(display_number, True)
     
@@ -582,12 +578,12 @@ class QwiicAlphanumeric(object):
     #
     # Turn a single alphanumeric display off
     def display_off_single(self, display_number):  
-        """
-            Turn a single alphanumeric display off
+        """!
+        Turn a single alphanumeric display off
 
-            :param display_number: the number of display to be updated 
-            :return: True if display is successfully turned off, false otherwise
-            :rtype: bool
+        @param display_number: the number of display to be updated
+
+        @return **bool** True if display is successfully turned off, false otherwise
         """
         return self.set_display_on_off(display_number, False)
     
@@ -596,14 +592,14 @@ class QwiicAlphanumeric(object):
     #
     # Set or clear the display on/off bit of a given display number
     def set_display_on_off(self, display_number, turn_on_display):
-        """
-            Set or clear the display on/off bit of a given display number
+        """!
+        Set or clear the display on/off bit of a given display number
 
-            :param display_number: the number of display to be updated
-            :param turn_on_display: boolean variable. If true, will turn display on.
-                If false, will turn display off
-            :return: True if display is successfully updated, false otherwise.
-            :rtype: bool
+        @param display_number: the number of display to be updated
+        @param turn_on_display: boolean variable. If true, will turn display on.
+            If false, will turn display off
+
+        @return **bool** True if display is successfully updated, false otherwise.
         """
         if turn_on_display:
             self.display_on_off = self.ALPHA_DISPLAY_ON
@@ -618,11 +614,10 @@ class QwiicAlphanumeric(object):
     #
     # Turn on all displays on the I2C bus
     def display_on(self):
-        """
-            Turn on all displays on the I2C bus
+        """!
+        Turn on all displays on the I2C bus
 
-            :return: True if displays are successfully turned on, false otherwise.
-            :rtype: bool
+        @return **bool** True if displays are successfully turned on, false otherwise.
         """
         status = True
 
@@ -639,11 +634,10 @@ class QwiicAlphanumeric(object):
     #
     # Turn off all displays on the I2C bus
     def display_off(self):
-        """
-            Turn off all displays on the I2C bus
+        """!
+        Turn off all displays on the I2C bus
 
-            :return: True if all displays are successfully turned off, false otherwise.
-            :rtype: bool
+        @return **bool** True if all displays are successfully turned off, false otherwise.
         """
         status = True
 
@@ -660,12 +654,12 @@ class QwiicAlphanumeric(object):
     #
     # Turn the decimal point on for a single display
     def decimal_on_single(self, display_number):
-        """
-            Turn the decimal point on for a single display
+        """!
+        Turn the decimal point on for a single display
 
-            :param display_number: the number of display to turn the decimal on for.
-            :return: true if decimal is successfully turned on, false otherwise.
-            :rtype: bool
+        @param display_number: the number of display to turn the decimal on for.
+
+        @return **bool** true if decimal is successfully turned on, false otherwise.
         """        
         return self.set_decimal_on_off(display_number, True)
 
@@ -674,12 +668,12 @@ class QwiicAlphanumeric(object):
     #
     # Turn the decimal point off for a single display
     def decimal_off_single(self, display_number):
-        """
-            Turn the decimal point off for a single display
+        """!
+        Turn the decimal point off for a single display
 
-            :param display_number: the number of display to turn the decimal point off for.
-            :return: true if decimal is successfully turned off, false otherwise.
-            :rtype: bool
+        @param display_number: the number of display to turn the decimal point off for.
+
+        @return **bool** true if decimal is successfully turned off, false otherwise.
         """
         return self.set_decimal_on_off(display_number, False)
     
@@ -688,14 +682,14 @@ class QwiicAlphanumeric(object):
     #
     # Set or clear the decimal on/off bit
     def set_decimal_on_off(self, display_number, turn_on_decimal):
-        """
-            Set or clear the decimal on/off bit
+        """!
+        Set or clear the decimal on/off bit
 
-            :param display_number: the number of display to update.
-            :param turn_on_decimal: boolean variable. If true, will turn decimal on.
-                If false, will turn decimal off.
-            :return: true if the display is updated successfully, false otherwise.
-            :rtype: bool
+        @param display_number: the number of display to update.
+        @param turn_on_decimal: boolean variable. If true, will turn decimal on.
+            If false, will turn decimal off.
+
+        @return **bool** true if the display is updated successfully, false otherwise.
         """
         adr = 0x03
         dat = 0
@@ -716,11 +710,10 @@ class QwiicAlphanumeric(object):
     #
     # Turn the decimal on for all displays on bus
     def decimal_on(self):
-        """
-            Turn the decimal on for all displays on the bus
+        """!
+        Turn the decimal on for all displays on the bus
 
-            :return: true if displays are updated successfully, false otherwise.
-            :rtype: bool
+        @return **bool** true if displays are updated successfully, false otherwise.
         """
         status = True
 
@@ -737,11 +730,10 @@ class QwiicAlphanumeric(object):
     #
     # Turn the decimal point off for all displays on bus
     def decimal_off(self):
-        """
-            Turn the decimal point off for all displays on the bus
+        """!
+        Turn the decimal point off for all displays on the bus
 
-            :return: true if displays are updated successfully, false otherwise.
-            :rtype: bool
+        @return **bool** true if displays are updated successfully, false otherwise.
         """
         status = True
 
@@ -758,12 +750,12 @@ class QwiicAlphanumeric(object):
     #
     # Turn the colon on for a single display
     def colon_on_single(self, display_number):
-        """
-            Turn the colon on for a single display
+        """!
+        Turn the colon on for a single display
 
-            :param display_number: number of display to update.
-            :return: true if display updated successfully, false otherwise.
-            :rtype: bool
+        @param display_number: number of display to update.
+
+        @return **bool** true if display updated successfully, false otherwise.
         """
         return self.set_colon_on_off(display_number, True)
 
@@ -772,12 +764,12 @@ class QwiicAlphanumeric(object):
     # 
     # Turn the colon off for a single display
     def colon_off_single(self, display_number):
-        """
-            Turn the colon off for a single display
+        """!
+        Turn the colon off for a single display
 
-            :param display_number: number of display to update.
-            :return: true if display updated successfully, false otherwise.
-            :rtype: bool
+        @param display_number: number of display to update.
+
+        @return **bool** true if display updated successfully, false otherwise.
         """
         return self.set_colon_on_off(display_number, False)
     
@@ -786,14 +778,12 @@ class QwiicAlphanumeric(object):
     #
     # Set or clear the colon on/off bit
     def set_colon_on_off(self, display_number, turn_on_colon):
-        """
-            Set or clear the colon on/off bit
+        """!
+        Set or clear the colon on/off bit
 
-            :param display_number: number of display to update.
-            :param turn_on_colon: boolean variable. If true, colon will turn on.
-                If false, colon will turn off.
-            :return true if display updated successfully, false otherwise.
-            :rtype: bool
+        @param display_number: number of display to update.
+        @param turn_on_colon: boolean variable. If true, colon will turn on.
+            If false, colon will turn off.
         """
         adr = 0x01
         dat = 0
@@ -814,11 +804,10 @@ class QwiicAlphanumeric(object):
     #
     # Turn the colon on for all displays on the bus
     def colon_on(self):
-        """
-            Turn the colon on for all displays on the bus
+        """!
+        Turn the colon on for all displays on the bus
 
-            :return: true if displays successfully updated, false otherwise.
-            :rtype: bool
+        @return **bool** true if displays successfully updated, false otherwise.
         """
         status = True
         
@@ -835,11 +824,10 @@ class QwiicAlphanumeric(object):
     #
     # Turn the colon off for all displays on the bus
     def colon_off(self):
-        """
-            Turn the colon off for all displays on the bus
+        """!
+        Turn the colon off for all displays on the bus
 
-            :return: true if all displays are successfully updated, false otherwise.
-            :rtype: bool
+        @return **bool** true if all displays are successfully updated, false otherwise.
         """
         status = True
 
@@ -856,14 +844,14 @@ class QwiicAlphanumeric(object):
     # 
     # Given a segment and a digit, set the matching bit within the RAM of the Holtek RAM set
     def illuminate_segment(self, segment, digit):
-        """
-            Given a segment and a digit, set the matching bit within the RAM of the Holtek RAM set
+        """!
+        Given a segment and a digit, set the matching bit within the RAM of the Holtek RAM set
 
-            :param segment: the segment to illuminate. There are 14 segments available, so A-N
-            :param digit: the digit on the display to turn the segment on. There are 4 digits 
-                per display
-            :return: nothing
-            :rtype: Void
+        @param segment: the segment to illuminate. There are 14 segments available, so A-N
+        @param digit: the digit on the display to turn the segment on. There are 4 digits 
+            per display
+
+        @return **Void** nothing
         """
         segment = ord(segment)
         com = segment - ord('A') # Convert the segment letter back to a number
@@ -901,14 +889,14 @@ class QwiicAlphanumeric(object):
     #
     # Given a binary set of segments and a digit, store this data into the RAM array
     def illuminate_char(self, segments_to_turn_on, digit):
-        """
-            Fiven a binary set of segments and a digit, store this data into the RAM array
+        """!
+        Fiven a binary set of segments and a digit, store this data into the RAM array
 
-            :param segments_to_turn_on: list of segments to illuminate which create an 
-                alphanumeric character
-            :param digit: digit on which to illuminate this char (list of segments)
-            :return: nothing
-            :rtype: Void
+        @param segments_to_turn_on: list of segments to illuminate which create an 
+            alphanumeric character
+        @param digit: digit on which to illuminate this char (list of segments)
+
+        @return **Void** nothing
         """
         for i in range(0, 14):
             if (segments_to_turn_on >> i) & 0b1:
@@ -921,13 +909,13 @@ class QwiicAlphanumeric(object):
     #
     # Print a character, for a given digit, on display
     def print_char(self, display_char, digit):
-        """
-            Print a character, for a given digit, on display
+        """!
+        Print a character, for a given digit, on display
 
-            :param display_char: the character to be printed to display
-            :param digit: the digit position where character should be printed
-            :return: nothing
-            :rtype: Void
+        @param display_char: the character to be printed to display
+        @param digit: the digit position where character should be printed
+
+        @return **Void** nothing
         """
         # Convert character to ASCII representation
         display_char = ord(display_char)
@@ -957,12 +945,12 @@ class QwiicAlphanumeric(object):
     #
     # Print a whole string to the alphanumeric display(s)
     def print(self, print_string):
-        """
-            Print a whole string to the alphanumeric display(s)
+        """!
+        Print a whole string to the alphanumeric display(s)
 
-            :param print_string: string to be printed
-            :return: true if update_display() is successful, false otherwise
-            :rtype: bool
+        @param print_string: string to be printed
+
+        @return **bool** true if update_display() is successful, false otherwise
         """
         # Clear the display_RAM array
         self.clear()
@@ -991,11 +979,10 @@ class QwiicAlphanumeric(object):
     #
     # Push the contents of display_RAM out to the various displays in 16 byte chunks
     def update_display(self):
-        """
-            Push the contents of display_RAM out on to the various displays in 16 byte chunks
+        """!
+        Push the contents of display_RAM out on to the various displays in 16 byte chunks
 
-            :return: true if displays are updated successfully, false otherwise.
-            :rtype: bool
+        @return **bool** true if displays are updated successfully, false otherwise.
         """
         status = True
 
@@ -1011,12 +998,12 @@ class QwiicAlphanumeric(object):
     #
     # Shift the display content to the right a number of digits
     def shift_right(self, shift_amt = 1):
-        """
-            Shift the display content to the right a number of digits
-            
-            :param shift_amt: the number of digits to shift the string
-            :return: true if display updates successfully, false otherwise.
-            :rtype: bool
+        """!
+        Shift the display content to the right a number of digits
+
+        @param shift_amt: the number of digits to shift the string
+
+        @return **bool** true if display updates successfully, false otherwise.
         """
         for x in range((4 * self.number_of_displays) - shift_amt, shift_amt-1, -1):
             self.display_content[x] = self.display_content[x - shift_amt]
@@ -1041,12 +1028,12 @@ class QwiicAlphanumeric(object):
     #
     # Shift the display content to the left a number of digits
     def shift_left(self, shift_amt = 1):
-        """
-            Shift the display content to the left a number of digits
+        """!
+        Shift the display content to the left a number of digits
 
-            :param shift_amt: the number of digits to shift the string
-            :return: true if display updates successfully, false otherwise.
-            :rtype: bool
+        @param shift_amt: the number of digits to shift the string
+
+        @return **bool** true if display updates successfully, false otherwise.
         """
         for x in range(0, 4 * self.number_of_displays):
             if (x + shift_amt) > (4 * self.number_of_displays):
@@ -1073,14 +1060,14 @@ class QwiicAlphanumeric(object):
     #
     # write LED updates to the RAM of the LED driver IC
     def write_RAM(self, address, reg, buff):
-        """
-            Write LED updates to the RAM of the LED driver IC
+        """!
+        Write LED updates to the RAM of the LED driver IC
 
-            :param address: I2C address of the display
-            :param reg: the location in RAM to write to 
-            :param buff: the bytes to be written
-            :return: true if RAM has been written to successfully, false otherwise.
-            :rtype: bool
+        @param address: I2C address of the display
+        @param reg: the location in RAM to write to
+        @param buff: the bytes to be written
+
+        @return **bool** true if RAM has been written to successfully, false otherwise.
         """
         display_num = 1 
         if address == self._device_address_display_two:
