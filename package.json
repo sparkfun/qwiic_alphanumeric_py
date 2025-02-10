@@ -1,9 +1,14 @@
 {
     "urls": [
-      ["qwiic_alphanumeric.py", "github:sparkfun/Qwiic_Alphanumeric_Py/qwiic_alphanumeric.py"]
-    ],
-    "deps": [
-      ["github:sparkfun/Qwiic_I2C_Py", "master"]
+      ["qwiic_alphanumeric_py_examples/qwiic_alphanumeric_ex01_print_string.py", "github:sparkfun/qwiic_alphanumeric_py/examples/qwiic_alphanumeric_ex01_print_string.py"],
+      ["qwiic_alphanumeric_py_examples/qwiic_alphanumeric_ex02_turn_on_one_segment.py", "github:sparkfun/qwiic_alphanumeric_py/examples/qwiic_alphanumeric_ex02_turn_on_one_segment.py"],
+      ["qwiic_alphanumeric_py_examples/qwiic_alphanumeric_ex03_print_char.py", "github:sparkfun/qwiic_alphanumeric_py/examples/qwiic_alphanumeric_ex03_print_char.py"],
+      ["qwiic_alphanumeric_py_examples/qwiic_alphanumeric_ex04_set_brightness.py", "github:sparkfun/qwiic_alphanumeric_py/examples/qwiic_alphanumeric_ex04_set_brightness.py"],
+      ["qwiic_alphanumeric_py_examples/qwiic_alphanumeric_ex05_set_blink_rate.py", "github:sparkfun/qwiic_alphanumeric_py/examples/qwiic_alphanumeric_ex05_set_blink_rate.py"],
+      ["qwiic_alphanumeric_py_examples/qwiic_alphanumeric_ex06_colon_and_decimal.py", "github:sparkfun/qwiic_alphanumeric_py/examples/qwiic_alphanumeric_ex06_colon_and_decimal.py"],
+      ["qwiic_alphanumeric_py_examples/qwiic_alphanumeric_ex07_unknown_char.py", "github:sparkfun/qwiic_alphanumeric_py/examples/qwiic_alphanumeric_ex07_unknown_char.py"],
+      ["qwiic_alphanumeric_py_examples/qwiic_alphanumeric_ex08_multi_display.py", "github:sparkfun/qwiic_alphanumeric_py/examples/qwiic_alphanumeric_ex08_multi_display.py"],
+      ["qwiic_alphanumeric_py_examples/qwiic_alphanumeric_ex09_scrolling_string.py", "github:sparkfun/qwiic_alphanumeric_py/examples/qwiic_alphanumeric_ex09_scrolling_string.py"]
     ],
     "version": "0.0.4"
 }
