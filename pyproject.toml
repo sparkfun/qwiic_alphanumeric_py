@@ -3,7 +3,7 @@ requires = ["setuptools"]
 
 [project]
 name = "sparkfun_qwiic_alphanumeric"
-version = "0.0.4"
+version = "2.0.0"
 description = "Sparkfun Electronics Qwiic Alphanumeric Package"
 readme = "DESCRIPTION.rst"
 
